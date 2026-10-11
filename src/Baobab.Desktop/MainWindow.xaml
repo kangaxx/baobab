@@ -1,12 +1,82 @@
 ﻿<Window x:Class="Baobab.Desktop.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Baobab.Desktop"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Baobab" Height="720" Width="1120" MinHeight="600" MinWidth="900"
+        Background="#F5F6FA" WindowStartupLocation="CenterScreen">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="236" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="72" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
+        <Border Grid.RowSpan="2" Background="#192236">
+            <DockPanel Margin="20">
+                <StackPanel DockPanel.Dock="Top">
+                    <TextBlock Text="BAOBAB" Foreground="White" FontSize="22" FontWeight="Bold" Margin="8,8,8,28" />
+                    <Button Content="运行概览" Background="#2B3851" Foreground="White" />
+                    <Button Content="AI Agents" />
+                    <Button Content="MCP 服务" />
+                    <Button Content="Hooks" />
+                    <Button Content="数据库" />
+                </StackPanel>
+                <TextBlock DockPanel.Dock="Bottom" Text="AI Agents · MCPs · Hooks"
+                           Foreground="#AAB4C7" FontSize="11" Margin="8,0,8,8" />
+            </DockPanel>
+        </Border>
+
+        <Border Grid.Column="1" Background="White" BorderBrush="#E7EAF0" BorderThickness="0,0,0,1">
+            <DockPanel Margin="28,0">
+                <TextBlock Text="管理中心" VerticalAlignment="Center" FontSize="16" FontWeight="SemiBold"
+                           Foreground="#253047" />
+                <TextBlock DockPanel.Dock="Right" Text="本地工作区" VerticalAlignment="Center"
+                           Foreground="#68748A" />
+            </DockPanel>
+        </Border>
+
+        <ScrollViewer Grid.Row="1" Grid.Column="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="32">
+                <TextBlock Text="运行概览" FontSize="28" FontWeight="SemiBold" Foreground="#192236" />
+                <TextBlock Text="管理你的 AI Agents、MCP 服务和 Hooks。"
+                           FontSize="14" Foreground="#68748A" Margin="0,8,0,24" />
+
+                <UniformGrid Columns="3" Margin="0,0,0,24">
+                    <Border Background="White" CornerRadius="8" Padding="20" Margin="0,0,12,0">
+                        <StackPanel>
+                            <TextBlock Text="AI Agents" Foreground="#68748A" />
+                            <TextBlock Text="0" FontSize="30" FontWeight="SemiBold" Foreground="#253047" Margin="0,8,0,0" />
+                            <TextBlock Text="已配置" Foreground="#68748A" FontSize="12" />
+                        </StackPanel>
+                    </Border>
+                    <Border Background="White" CornerRadius="8" Padding="20" Margin="6,0">
+                        <StackPanel>
+                            <TextBlock Text="MCP 服务" Foreground="#68748A" />
+                            <TextBlock Text="0" FontSize="30" FontWeight="SemiBold" Foreground="#253047" Margin="0,8,0,0" />
+                            <TextBlock Text="已配置" Foreground="#68748A" FontSize="12" />
+                        </StackPanel>
+                    </Border>
+                    <Border Background="White" CornerRadius="8" Padding="20" Margin="12,0,0,0">
+                        <StackPanel>
+                            <TextBlock Text="Hooks" Foreground="#68748A" />
+                            <TextBlock Text="0" FontSize="30" FontWeight="SemiBold" Foreground="#253047" Margin="0,8,0,0" />
+                            <TextBlock Text="已配置" Foreground="#68748A" FontSize="12" />
+                        </StackPanel>
+                    </Border>
+                </UniformGrid>
+
+                <Border Background="White" CornerRadius="8" Padding="24">
+                    <StackPanel>
+                        <TextBlock Text="工作区状态" FontSize="18" FontWeight="SemiBold" Foreground="#253047" />
+                        <TextBlock Text="数据库" Foreground="#68748A" Margin="0,20,0,4" />
+                        <TextBlock Text="尚未配置连接" Foreground="#B56A1E" />
+                        <TextBlock Text="连接配置由宿主应用提供；请先注册所选数据库的 .NET 数据提供程序。"
+                                   Foreground="#68748A" TextWrapping="Wrap" Margin="0,8,0,0" />
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Window>
