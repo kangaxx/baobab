@@ -2,7 +2,7 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
 import { execFile } from "node:child_process";
-import { writeFileSync, unlinkSync } from "node:fs";
+import { writeFileSync, unlinkSync, appendFileSync, mkdirSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { randomUUID } from "node:crypto";
@@ -11,6 +11,27 @@ const SQLCMD = "sqlcmd";
 const SQLSERVER = process.env.WORKLOG_SQLSERVER ?? "localhost";
 const DB = "AIWorkLog";
 const DEFAULT_SIG = process.env.AI_SIGNATURE ?? "Unknown Agent";
+
+// 本地日志：逐行记录 stdio 上收到的 JSON-RPC 原文；写日志失败不影响主流程
+const LOG_DIR =
+  process.env.WORKLOG_LOG_DIR ??
+  join(process.env.USERPROFILE ?? tmpdir(), ".copilot", "daily-logs");
+mkdirSync(LOG_DIR, { recursive: true });
+
+let stdinBuf = "";
+process.stdin.on("data", (chunk) => {
+  stdinBuf += chunk.toString("utf8");
+  let i;
+  while ((i = stdinBuf.indexOf("\n")) >= 0) {
+    const line = stdinBuf.slice(0, i).trim();
+    stdinBuf = stdinBuf.slice(i + 1);
+    if (!line) continue;
+    const day = new Date().toISOString().slice(0, 10).replace(/-/g, "");
+    try {
+      appendFileSync(join(LOG_DIR, `mcp-${day}.log`), `[${new Date().toISOString()}] ${line}\n`, "utf8");
+    } catch { /* 忽略日志写入失败 */ }
+  }
+});
 
 // 生成 NVARCHAR 字面量；null/undefined -> NULL
 function nq(v) {

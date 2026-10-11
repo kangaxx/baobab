@@ -49,6 +49,13 @@ npm install
 |------|------|------|
 | `WORKLOG_SQLSERVER` | `localhost` | SQL Server 实例（Windows 集成认证） |
 | `AI_SIGNATURE` | `Unknown Agent` | 调用方未传签名时的兜底值 |
+| `WORKLOG_LOG_DIR` | `%USERPROFILE%\.copilot\daily-logs` | 本地日志目录 |
+
+## 本地日志
+
+server 会把 stdio 上收到的每条 JSON-RPC 原文逐行写入
+`<LOG_DIR>\mcp-yyyyMMdd.log`（带 UTC 时间戳），按天滚动。
+日志只进不出、失败静默，不影响主流程；用于排查"agent 到底发了什么"。
 
 ## 测试
 
