@@ -1,0 +1,18 @@
+﻿{
+    "name":  "daily-report-with-sql",
+    "version":  "1.0.0",
+    "description":  "MCP server that mechanically logs AI agent tasks (prompt start / result finish) into SQL Server AIWorkLog via stored procedures",
+    "main":  "server.js",
+    "scripts":  {
+                    "test":  "node test-client.mjs"
+                },
+    "keywords":  [
+
+                 ],
+    "author":  "",
+    "license":  "MIT",
+    "dependencies":  {
+                         "@modelcontextprotocol/sdk":  "^1.32.1"
+                     },
+    "type":  "module"
+}
