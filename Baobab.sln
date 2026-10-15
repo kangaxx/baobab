@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Baobab.Core", "src\Baobab.C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Baobab.Desktop", "src\Baobab.Desktop\Baobab.Desktop.csproj", "{63F8AE9E-EF3B-46E2-B416-374038D54458}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{0AB3BF05-4346-4AA6-1389-037BE0695223}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Baobab.AgentDiscovery.Checks", "tests\Baobab.AgentDiscovery.Checks\Baobab.AgentDiscovery.Checks.csproj", "{90BEEE45-53AA-48F0-A7C3-F3F4631B6108}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +47,18 @@ Global
 		{63F8AE9E-EF3B-46E2-B416-374038D54458}.Release|x64.Build.0 = Release|Any CPU
 		{63F8AE9E-EF3B-46E2-B416-374038D54458}.Release|x86.ActiveCfg = Release|Any CPU
 		{63F8AE9E-EF3B-46E2-B416-374038D54458}.Release|x86.Build.0 = Release|Any CPU
+		{90BEEE45-53AA-48F0-A7C3-F3F4631B6108}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90BEEE45-53AA-48F0-A7C3-F3F4631B6108}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90BEEE45-53AA-48F0-A7C3-F3F4631B6108}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{90BEEE45-53AA-48F0-A7C3-F3F4631B6108}.Debug|x64.Build.0 = Debug|Any CPU
+		{90BEEE45-53AA-48F0-A7C3-F3F4631B6108}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{90BEEE45-53AA-48F0-A7C3-F3F4631B6108}.Debug|x86.Build.0 = Debug|Any CPU
+		{90BEEE45-53AA-48F0-A7C3-F3F4631B6108}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90BEEE45-53AA-48F0-A7C3-F3F4631B6108}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90BEEE45-53AA-48F0-A7C3-F3F4631B6108}.Release|x64.ActiveCfg = Release|Any CPU
+		{90BEEE45-53AA-48F0-A7C3-F3F4631B6108}.Release|x64.Build.0 = Release|Any CPU
+		{90BEEE45-53AA-48F0-A7C3-F3F4631B6108}.Release|x86.ActiveCfg = Release|Any CPU
+		{90BEEE45-53AA-48F0-A7C3-F3F4631B6108}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,5 +66,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{397E9765-4045-4705-A0A5-FB6AF69652EE} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{63F8AE9E-EF3B-46E2-B416-374038D54458} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
+		{90BEEE45-53AA-48F0-A7C3-F3F4631B6108} = {0AB3BF05-4346-4AA6-1389-037BE0695223}
 	EndGlobalSection
 EndGlobal

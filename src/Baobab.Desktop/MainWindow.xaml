@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Baobab" MinHeight="600" MinWidth="900"
         WindowState="Maximized"
-        Background="#F5F6FA" WindowStartupLocation="CenterScreen">
+        Background="#F5F6FA" WindowStartupLocation="CenterScreen"
+        Loaded="Window_Loaded" Closed="Window_Closed">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="236" />
@@ -18,8 +19,8 @@
             <DockPanel Margin="20">
                 <StackPanel DockPanel.Dock="Top">
                     <TextBlock Text="BAOBAB" Foreground="White" FontSize="22" FontWeight="Bold" Margin="8,8,8,28" />
-                    <Button Content="运行概览" Background="#2B3851" Foreground="White" />
-                    <Button Content="AI Agents" />
+                    <Button x:Name="OverviewButton" Content="运行概览" Background="#2B3851" Foreground="White" Click="Overview_Click" />
+                    <Button x:Name="AgentsButton" Content="AI Agents" Click="Agents_Click" />
                     <Button Content="MCP 服务" />
                     <Button Content="Hooks" />
                     <Button Content="数据库" />
@@ -38,7 +39,7 @@
             </DockPanel>
         </Border>
 
-        <ScrollViewer Grid.Row="1" Grid.Column="1" VerticalScrollBarVisibility="Auto">
+        <ScrollViewer x:Name="OverviewPage" Grid.Row="1" Grid.Column="1" VerticalScrollBarVisibility="Auto">
             <StackPanel Margin="32" MaxWidth="1600" HorizontalAlignment="Center">
                 <TextBlock Text="运行概览" FontSize="28" FontWeight="SemiBold" Foreground="#192236" />
                 <TextBlock Text="管理你的 AI Agents、MCP 服务和 Hooks。"
@@ -48,8 +49,8 @@
                     <Border Background="White" CornerRadius="8" Padding="20" Margin="0,0,12,0">
                         <StackPanel>
                             <TextBlock Text="AI Agents" Foreground="#68748A" />
-                            <TextBlock Text="0" FontSize="30" FontWeight="SemiBold" Foreground="#253047" Margin="0,8,0,0" />
-                            <TextBlock Text="已配置" Foreground="#68748A" FontSize="12" />
+                            <TextBlock x:Name="AgentCount" Text="—" FontSize="30" FontWeight="SemiBold" Foreground="#253047" Margin="0,8,0,0" />
+                            <TextBlock x:Name="AgentOverviewStatus" Text="等待扫描本机" Foreground="#68748A" FontSize="12" />
                         </StackPanel>
                     </Border>
                     <Border Background="White" CornerRadius="8" Padding="20" Margin="6,0">
@@ -79,5 +80,49 @@
                 </Border>
             </StackPanel>
         </ScrollViewer>
+        <Grid x:Name="AgentsPage" Grid.Row="1" Grid.Column="1" Margin="32" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,20">
+                <DockPanel>
+                    <Button x:Name="ScanButton" DockPanel.Dock="Right" Content="扫描本机"
+                            Padding="16,8" Click="Scan_Click" />
+                    <TextBlock Text="AI Agents" FontSize="28" FontWeight="SemiBold" Foreground="#192236" />
+                </DockPanel>
+                <TextBlock Text="自动检测命令行工具、桌面应用和 VS Code 插件；无需管理员权限，不会启动工具或读取密钥。"
+                           Foreground="#68748A" Margin="0,8,0,0" TextWrapping="Wrap" />
+                <TextBlock x:Name="ScanStatus" Text="等待扫描本机" Margin="0,8,0,0" TextWrapping="Wrap" />
+                <TextBlock Text="已安装不代表已登录或可使用；“未发现”仅表示已扫描的位置中没有找到。"
+                           Foreground="#68748A" Margin="0,4,0,0" TextWrapping="Wrap" />
+            </StackPanel>
+            <DataGrid x:Name="AgentGrid" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True"
+                      CanUserAddRows="False" CanUserDeleteRows="False" HeadersVisibility="Column"
+                      RowHeaderWidth="0" GridLinesVisibility="Horizontal" Background="White"
+                      EnableRowVirtualization="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="名称" Binding="{Binding Name}" Width="180" />
+                    <DataGridTextColumn Header="类型" Binding="{Binding Category}" Width="100" />
+                    <DataGridTextColumn Header="状态" Binding="{Binding Status}" Width="185" />
+                    <DataGridTextColumn Header="版本" Binding="{Binding Version}" Width="150" />
+                    <DataGridTextColumn Header="安装路径 / 插件清单" Binding="{Binding Paths}" Width="*" MinWidth="240">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextWrapping" Value="Wrap" />
+                                <Setter Property="ToolTip" Value="{Binding Paths}" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="检测来源" Binding="{Binding Sources}" Width="170" />
+                </DataGrid.Columns>
+            </DataGrid>
+            <Expander x:Name="ScanWarnings" Grid.Row="2" Header="扫描提示" Visibility="Collapsed" Margin="0,12,0,0">
+                <ScrollViewer MaxHeight="140" VerticalScrollBarVisibility="Auto">
+                    <TextBlock x:Name="WarningDetails" TextWrapping="Wrap" Foreground="#B56A1E" />
+                </ScrollViewer>
+            </Expander>
+        </Grid>
     </Grid>
 </Window>
